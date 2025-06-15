@@ -1,0 +1,4 @@
+services:
+  ollama:
+    environment:
+      ROCR_VISIBLE_DEVICES: "0,1"

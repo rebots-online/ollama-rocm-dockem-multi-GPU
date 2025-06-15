@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  app_proxy:
+    image: getumbrel/app-proxy:1.0.0
+    environment:
+      APP_HOST: ollama_ollama_1
+      APP_PORT: "11434"
+      PROXY_AUTH_ADD: "false"
+
+  ollama:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rebots/ollama-rocm-dockem-multi-GPU:latest  
+    privileged: true
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /madev/dri:/dev/dri
+    restart: on-failure
